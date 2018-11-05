@@ -45,6 +45,13 @@ packages=${packages// /}
 packages=${packages//,/ }
 # Remove any newlines (because it will have a newline if it's empty)
 packages=${packages//$'\n'/}
+
+# Keep no backups (not required, simply makes cache bigger)
+tlmgr option -- autobackup 0
+
+# Update the TL install but add nothing new
+tlmgr update --self --all --no-auto-install
+
 # If we have packages to install
 if [ ! -z "$packages" ]; then
   packages_comma=${packages// /, }
